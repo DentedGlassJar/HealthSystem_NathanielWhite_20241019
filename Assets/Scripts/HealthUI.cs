@@ -11,4 +11,9 @@ public class HealthUI : MonoBehaviour
         textmeshpro = GetComponent<TextMeshProUGUI>();
         instance = this;
     }
+
+    public ShowHUD()
+    {
+
+    }
 }
