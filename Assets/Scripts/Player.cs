@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Player : Actor {
+public class Player : Actor 
+{
     public static Player instance;
     
     int lastCheckedHealth;
     int lastCheckedXp;
     int lastCheckedLevel;
 
-    public void Awake() {
+    public void Awake() 
+    {
         instance = this;
     }
 
@@ -18,7 +20,8 @@ public class Player : Actor {
         gameObject.SetActive(false);
     }
 
-    public override void Update() {
+    public override void Update() 
+    {
         base.Update();
         if (lastCheckedHealth != healthSystem.health || lastCheckedLevel != healthSystem.level || lastCheckedXp != healthSystem.xp)
         {
