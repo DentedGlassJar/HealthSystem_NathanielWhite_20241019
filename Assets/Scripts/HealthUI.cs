@@ -12,8 +12,4 @@ public class HealthUI : MonoBehaviour
         instance = this;
     }
 
-    public ShowHUD()
-    {
-
-    }
 }

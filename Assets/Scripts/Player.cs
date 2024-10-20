@@ -8,10 +8,7 @@ public class Player : Actor
     int lastCheckedHealth;
     int lastCheckedXp;
     int lastCheckedLevel;
-    int health;
-    int shield;
-    int lives;
-    string healthStatus;
+
     
 
     public void Awake() 
@@ -58,25 +55,5 @@ public class Player : Actor
         var desiredDirectionShot = (mouseReticle.instance.transform.position - transform.position);
         desiredDirectionShot.y = 0.0f;
         return desiredDirectionShot.normalized;
-    }
-
-    public TakeDamage()
-    {
-
-    }
-
-    public Heal(int hp)
-    {
-
-    }
-
-    public RegenerateShield(int hp)
-    {
-
-    }
-
-    public Revive()
-    {
-
     }
 }

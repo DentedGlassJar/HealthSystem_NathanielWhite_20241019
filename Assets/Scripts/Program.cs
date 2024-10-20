@@ -47,6 +47,8 @@ public class HealthSystem
     {
         // Reset all variables to default values
         health = 100;
+        shield = 100;
+        lives = 3;
     }
 
     // Optional XP system methods
