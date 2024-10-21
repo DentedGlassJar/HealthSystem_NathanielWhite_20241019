@@ -124,7 +124,7 @@ public class HealthSystem
         shield = 100;
         lives = 3;
         xp = 0;
-        level = 99;
+        level = 1;
         isShieldUp = true;
     }
 
