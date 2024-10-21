@@ -126,7 +126,7 @@ public class HealthSystem
         isShieldUp = true;
     }
 
-    public void AllUnitTests()
+    public static void AllUnitTests()
     {
         DamageShieldOnly();
         DamageBoth();
@@ -146,7 +146,7 @@ public class HealthSystem
         ReviveTest();
     }
 
-    public void DamageShieldOnly()
+    public static void DamageShieldOnly()
     {
         HealthSystem system = new HealthSystem();
         system.shield = 100;
@@ -157,67 +157,125 @@ public class HealthSystem
 
         Debug.Assert(90 == system.shield);
         Debug.Assert(100 == system.health);
+        Debug.Assert(4 == system.lives);
+    }
+
+    public static void DamageBoth()
+    {
+        HealthSystem system = new HealthSystem();
+
+        system.TakeDamage(110);
+
+        Debug.Assert(0 == system.shield);
+        Debug.Assert(90 == system.health);
         Debug.Assert(3 == system.lives);
     }
 
-    public void DamageBoth()
+    public static void DamageHealthOnly()
     {
         HealthSystem system = new HealthSystem();
+
+        system.shield = 0;
+        system.TakeDamage(10);
+
+        Debug.Assert(0 == system.shield);
+        Debug.Assert(90 == system.health);
+        Debug.Assert(3 == system.lives);
     }
 
-    public void DamageHealthOnly()
+    public static void ReduceHealthToZero()
     {
         HealthSystem system = new HealthSystem();
-    }
 
-    public void ReduceHealthToZero()
-    {
-        HealthSystem system = new HealthSystem();
+        system.shield = 0;
+        system.TakeDamage(100);
+
+        Debug.Assert(0 == system.shield);
+        Debug.Assert(0 == system.health);
+        Debug.Assert(3 == system.lives);
     }
     
-    public void ReduceBothToZero()
+    public static void ReduceBothToZero()
     {
         HealthSystem system = new HealthSystem();
+
+        system.TakeDamage(200);
+
+        Debug.Assert(100 == system.shield);
+        Debug.Assert(100 == system.health);
+        Debug.Assert(2 == system.lives);
     }
 
-    public void NegativeDamageInput()
+    public static void NegativeDamageInput()
     {
         HealthSystem system = new HealthSystem();
+
+        Debug.Assert(100 == system.shield);
+        Debug.Assert(100 == system.health);
+        Debug.Assert(3 == system.lives);
     }
 
-    public void NormalHealing()
+    public static void NormalHealing()
     {
         HealthSystem system = new HealthSystem();
+
+        Debug.Assert(100 == system.shield);
+        Debug.Assert(100 == system.health);
+        Debug.Assert(3 == system.lives);
     }
 
-    public void MaxHeal()
+    public static void MaxHeal()
     {
         HealthSystem system = new HealthSystem();
+
+        Debug.Assert(100 == system.shield);
+        Debug.Assert(100 == system.health);
+        Debug.Assert(3 == system.lives);
     }
 
-    public void NegativeHealInput()
+    public static void NegativeHealInput()
     {
         HealthSystem system = new HealthSystem();
+
+        Debug.Assert(100 == system.shield);
+        Debug.Assert(100 == system.health);
+        Debug.Assert(3 == system.lives);
     }
 
-    public void NormalShieldRegen()
+    public static void NormalShieldRegen()
     {
         HealthSystem system = new HealthSystem();
+
+        Debug.Assert(100 == system.shield);
+        Debug.Assert(100 == system.health);
+        Debug.Assert(3 == system.lives);
     }
 
-    public void MaxShield()
+    public static void MaxShield()
     {
         HealthSystem system = new HealthSystem();
+        
+        Debug.Assert(100 == system.shield);
+        Debug.Assert(100 == system.health);
+        Debug.Assert(3 == system.lives);
     }
 
-    public void NegativeShieldInput()
+    public static void NegativeShieldInput()
     {
         HealthSystem system = new HealthSystem();
+
+        Debug.Assert(100 == system.shield);
+        Debug.Assert(100 == system.health);
+        Debug.Assert(3 == system.lives);
     }
 
-    public void ReviveTest()
+    public static void ReviveTest()
     {
         HealthSystem system = new HealthSystem();
+        
+        Debug.Assert(100 == system.shield);
+        Debug.Assert(100 == system.health);
+        Debug.Assert(3 == system.lives);
     }
 
     // Optional XP system methods

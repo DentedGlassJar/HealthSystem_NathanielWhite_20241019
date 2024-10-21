@@ -15,6 +15,7 @@ public class Player : Actor
     public void Awake() 
     {
         instance = this;
+        HealthSystem.AllUnitTests();
     }
 
     public override void Die()
