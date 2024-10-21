@@ -8,8 +8,9 @@ public class Player : Actor
     int lastCheckedHealth;
     int lastCheckedXp;
     int lastCheckedLevel;
+    int lastCheckedShield;
 
-    
+
 
     public void Awake() 
     {
@@ -25,12 +26,13 @@ public class Player : Actor
     public override void Update() 
     {
         base.Update();
-        if (lastCheckedHealth != healthSystem.health || lastCheckedLevel != healthSystem.level || lastCheckedXp != healthSystem.xp)
+        if (lastCheckedHealth != healthSystem.health || lastCheckedLevel != healthSystem.level || lastCheckedXp != healthSystem.xp || lastCheckedShield != healthSystem.shield)
         {
             HealthUI.instance.textmeshpro.text = healthSystem.ShowHUD();
             lastCheckedHealth = healthSystem.health;
             lastCheckedLevel = healthSystem.level;
             lastCheckedXp = healthSystem.xp;
+            lastCheckedShield = healthSystem.shield;
         }
     }
 

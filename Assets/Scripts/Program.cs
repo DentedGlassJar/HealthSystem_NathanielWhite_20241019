@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 public class HealthSystem
 {
@@ -6,6 +7,7 @@ public class HealthSystem
     public string healthStatus;
     public int shield;
     public int lives;
+    public bool isShieldUp;
 
     // Optional XP system variables
     public int xp;
@@ -26,7 +28,25 @@ public class HealthSystem
     public void TakeDamage(int damage)
     {
         // Implement damage logic
+        if (isShieldUp == true)
+        {
+            shield = shield - damage;
 
+            if (shield <= 0)
+            {
+                isShieldUp = false;
+                shield = 0;
+            }
+        }
+        else
+        {
+            health = health - damage;
+
+            if(health <= 0)
+            {
+                health = 0;
+            }
+        }
     }
 
     public void Heal(int hp)
@@ -50,6 +70,7 @@ public class HealthSystem
         health = 100;
         shield = 100;
         lives = 3;
+        isShieldUp = true;
     }
 
     // Optional XP system methods
