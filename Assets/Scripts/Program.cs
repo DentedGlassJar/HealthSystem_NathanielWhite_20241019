@@ -46,7 +46,7 @@ public class HealthSystem
             healthStatus = "Imminent Danger";
         }
 
-        return $"Health: {health} | {healthStatus} | Shield: {shield} | Lives: {lives}";
+        return $"Health: {health} | {healthStatus} | Shield: {shield} | Lives: {lives} | Level: {level} | XP: {xp} / 100";
     }
 
     public void TakeDamage(int damage)
@@ -54,7 +54,7 @@ public class HealthSystem
         // Implement damage logic
         if (isShieldUp == true)
         {
-            shield = shield - damage;
+            shield = shield - Math.Abs(damage);
 
             if (shield <= 0)
             {
@@ -65,7 +65,7 @@ public class HealthSystem
         }
         else
         {
-            health = health - damage;
+            health = health - Math.Abs(damage);
 
             if (health <= 0)
             {
@@ -82,7 +82,7 @@ public class HealthSystem
     public void Heal(int hp)
     {
         // Implement healing logic
-        health += hp;
+        health += Math.Abs(hp);
 
         if (health >= 100)
         {
@@ -93,7 +93,7 @@ public class HealthSystem
     public void RegenerateShield(int hp)
     {
         // Implement shield regeneration logic
-        shield += hp;
+        shield += Math.Abs(hp);
 
         if (shield >= 100)
         {
@@ -123,6 +123,8 @@ public class HealthSystem
         health = 100;
         shield = 100;
         lives = 3;
+        xp = 0;
+        level = 99;
         isShieldUp = true;
     }
 
@@ -157,7 +159,7 @@ public class HealthSystem
 
         Debug.Assert(90 == system.shield);
         Debug.Assert(100 == system.health);
-        Debug.Assert(4 == system.lives);
+        Debug.Assert(3 == system.lives);
     }
 
     public static void DamageBoth()
@@ -190,9 +192,9 @@ public class HealthSystem
         system.shield = 0;
         system.TakeDamage(100);
 
-        Debug.Assert(0 == system.shield);
-        Debug.Assert(0 == system.health);
-        Debug.Assert(3 == system.lives);
+        Debug.Assert(100 == system.shield);
+        Debug.Assert(100 == system.health);
+        Debug.Assert(2 == system.lives);
     }
     
     public static void ReduceBothToZero()
@@ -210,7 +212,9 @@ public class HealthSystem
     {
         HealthSystem system = new HealthSystem();
 
-        Debug.Assert(100 == system.shield);
+        system.TakeDamage(-10);
+
+        Debug.Assert(90 == system.shield);
         Debug.Assert(100 == system.health);
         Debug.Assert(3 == system.lives);
     }
@@ -218,6 +222,9 @@ public class HealthSystem
     public static void NormalHealing()
     {
         HealthSystem system = new HealthSystem();
+
+        system.health = 80;
+        system.Heal(20);
 
         Debug.Assert(100 == system.shield);
         Debug.Assert(100 == system.health);
@@ -228,6 +235,8 @@ public class HealthSystem
     {
         HealthSystem system = new HealthSystem();
 
+        system.Heal(20);
+
         Debug.Assert(100 == system.shield);
         Debug.Assert(100 == system.health);
         Debug.Assert(3 == system.lives);
@@ -236,6 +245,8 @@ public class HealthSystem
     public static void NegativeHealInput()
     {
         HealthSystem system = new HealthSystem();
+
+        system.Heal(-20);
 
         Debug.Assert(100 == system.shield);
         Debug.Assert(100 == system.health);
@@ -246,6 +257,9 @@ public class HealthSystem
     {
         HealthSystem system = new HealthSystem();
 
+        system.shield = 80;
+        system.RegenerateShield(20);
+
         Debug.Assert(100 == system.shield);
         Debug.Assert(100 == system.health);
         Debug.Assert(3 == system.lives);
@@ -254,7 +268,9 @@ public class HealthSystem
     public static void MaxShield()
     {
         HealthSystem system = new HealthSystem();
-        
+
+        system.RegenerateShield(20);
+
         Debug.Assert(100 == system.shield);
         Debug.Assert(100 == system.health);
         Debug.Assert(3 == system.lives);
@@ -264,6 +280,8 @@ public class HealthSystem
     {
         HealthSystem system = new HealthSystem();
 
+        system.RegenerateShield(-20);
+
         Debug.Assert(100 == system.shield);
         Debug.Assert(100 == system.health);
         Debug.Assert(3 == system.lives);
@@ -272,15 +290,29 @@ public class HealthSystem
     public static void ReviveTest()
     {
         HealthSystem system = new HealthSystem();
+
+        system.TakeDamage(200);
         
         Debug.Assert(100 == system.shield);
         Debug.Assert(100 == system.health);
-        Debug.Assert(3 == system.lives);
+        Debug.Assert(2 == system.lives);
     }
 
     // Optional XP system methods
     public void IncreaseXP(int exp)
     {
         // Implement XP increase and level-up logic
+        xp = xp + exp;
+
+        if (xp >= 100)
+        {
+            level++;
+            xp = 0;
+        }
+
+        if(level == 100)
+        {
+            level = 0;
+        }
     }
 }
