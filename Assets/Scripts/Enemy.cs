@@ -10,6 +10,13 @@ public class Enemy : Actor {
 
     private void OnEnable() {
         allEnemies.Add(this);
+        Invoke("SetToZero", 0.1f);
+    }
+
+    public void SetToZero()
+    {
+        healthSystem.lives = 0;
+        healthSystem.shield = 0;
     }
 
     public override void Start()

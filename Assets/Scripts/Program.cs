@@ -20,12 +20,13 @@ public class HealthSystem
     public string ShowHUD()
     {
         // Implement HUD display
-        return "";
+        return $"Health: {health} | Shield: {shield} | Lives: {lives}";
     }
 
     public void TakeDamage(int damage)
     {
         // Implement damage logic
+
     }
 
     public void Heal(int hp)
