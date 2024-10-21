@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using System;
+using Unity.VisualScripting;
 public class HealthSystem
 {
     // Variables
@@ -22,7 +23,29 @@ public class HealthSystem
     public string ShowHUD()
     {
         // Implement HUD display
-        return $"Health: {health} | Shield: {shield} | Lives: {lives}";
+
+        if(health <= 100 && health >= 91)
+        {
+            healthStatus = "Perfectly Healthy";
+        }
+        else if(health <= 90 && health >= 76)
+        {
+            healthStatus = "Healthy";
+        }
+        else if(health <= 75 && health >= 51)
+        {
+            healthStatus = "Hurt";
+        }
+        else if(health <= 50 && health >= 11)
+        {
+            healthStatus = "Badly Hurt";
+        }
+        else if(health <= 10 && health >= 1)
+        {
+            healthStatus = "Imminent Danger";
+        }
+
+        return $"Health: {health} | {healthStatus} | Shield: {shield} | Lives: {lives}";
     }
 
     public void TakeDamage(int damage)
@@ -34,6 +57,7 @@ public class HealthSystem
 
             if (shield <= 0)
             {
+                health = health - Math.Abs(shield);
                 isShieldUp = false;
                 shield = 0;
             }
@@ -46,6 +70,11 @@ public class HealthSystem
             {
                 health = 0;
             }
+        }
+
+        if(health <= 0 && lives != 0)
+        {
+            Revive();
         }
     }
 
@@ -62,6 +91,17 @@ public class HealthSystem
     public void Revive()
     {
         // Implement revive logic
+        health = 100;
+        shield = 100;
+        lives = lives - 1;
+        isShieldUp = true;
+
+        if(lives == 0)
+        {
+            health = 0;
+            shield = 0;
+            lives = 0;
+        }
     }
 
     public void ResetGame()
