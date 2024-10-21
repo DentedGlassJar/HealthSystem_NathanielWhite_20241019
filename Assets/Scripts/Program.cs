@@ -81,11 +81,23 @@ public class HealthSystem
     public void Heal(int hp)
     {
         // Implement healing logic
+        health += 20;
+        
+        if(health >= 100)
+        {
+            health = 100;
+        }
     }
 
     public void RegenerateShield(int hp)
     {
         // Implement shield regeneration logic
+        shield += 20;
+
+        if (shield >= 100)
+        {
+            shield = 100;
+        }
     }
 
     public void Revive()
